@@ -56,6 +56,23 @@
 	(println crlf "The current amount is : " ?sum "c " crlf)
 )
 
+(defrule ask-item
+	?f2 <- (required-value (value ?x))
+	(test (eq ?x 0))
+=>
+	(printout t "Please select an item to purchase:	" crlf "(cola R8.50)" crlf "(orange R10.00)" crlf "(sweets R12.50)" crlf "(chocolate R15.00)" crlf)
+	(bind ?item (read))
+	(if (or (eq ?item cola) (eq ?item 8.50))
+		then (bind ?item 8.50))
+    (if (or (eq ?item orange) (eq ?item 10.00))
+		then (bind ?item 10.00))
+	(if (or (eq ?item sweets) (eq ?item 12.50))
+		then (bind ?item 12.50))
+	(if (or (eq ?item chocolate) (eq ?item 15.00))
+		then (bind ?item 15.00))
+	(modify ?f2 (value ?item)))
+
+
 ;;;################
 ;;;  Check Rules
 ;;;################	
